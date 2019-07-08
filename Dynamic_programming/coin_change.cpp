@@ -2,33 +2,52 @@
 #include <climits>
 using namespace std;
 
-int *min_coins(int sum, int *coins, int n)
+void print_coins(int *R, int n, int *coins)
+{
+    if(R[n-1] == -1)
+    {
+        return;     //no solution
+    }
+
+    int start = n-1;
+    while(start != 0)
+    {
+        int j = R[start];
+        cout << coins[j] << " ";
+        start -= coins[j];
+    }
+    cout << endl;
+}
+
+int min_coins(int sum, int *coins, int n)
 {
     int dp[sum+1];
-    int coins_count[n];
+    int R[sum+1];
 
-    for(int i=0; i<n; i++)
-        coins_count[i] = 0;
     for(int i=0; i<sum+1; i++)
-        dp[i] = 0;
+        R[i] = -1;
+    for(int i=0; i<sum+1; i++)
+        dp[i] = INT_MAX;
 
     dp[0] = 0;
 
-    for(int i=1; i<=sum; i++)       //i is the current amount
+    for(int j=0; j<n; j++)       //i is the current amount
     {
-        dp[i] = INT_MAX;
-        for(int k=0; k<n; k++)
+        for(int i=1; i<=sum; i++)
         {
-            if(i - coins[k] >= 0)
+            if(i - coins[j] >= 0)
             {
-                if(dp[i-coins[k]] < dp[i])
-                    coins_count[k]++;
-                dp[i] = min(dp[i], dp[i-coins[k]]+1);
+                if(dp[i-coins[j]] + 1 < dp[i])
+                {
+                    dp[i] = 1 + dp[i-coins[j]];
+                    R[i] = j;
+                }       //else dp[i] = INT_MAX
             }
         }
     }
-    //return dp[sum];
-    return coins_count;
+
+   print_coins(R, sum+1, coins);
+   return dp[sum];
 }
 
 int main()
@@ -36,22 +55,16 @@ int main()
     int t;
     cin >> t;
     int coins[] = {1,2,5,10,20,50,100,200,500,2000};
-    int len_coins = sizeof(coins)/sizeof(int);
+    int n = sizeof(coins)/sizeof(int);
 
     while(t--)
     {
-        int n;
-        cin >> n ;
-        //cout << min_coins(n, coins, len_coins) << endl;
-        int *ans = min_coins(n, coins, len_coins);
-        for(int i=0; i<len_coins; i++)
-        {
-            // for(int j=1; j<=ans[i]; j++)
-            //     cout << coins[i] << " ";
-            //cout << endl;
-            cout << ans[i] << " ";
-        }
-cout << endl;
+        int sum;
+        cin >> sum ;
+        cout << min_coins(sum, coins, n) << endl;
+        //min_coins(n, coins, len_coins);
+       
     }
+
     return (0);
 }
