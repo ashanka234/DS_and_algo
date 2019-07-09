@@ -31,9 +31,9 @@ int min_coins(int sum, int *coins, int n)
 
     dp[0] = 0;
 
-    for(int j=0; j<n; j++)       //i is the current amount
+    for(int j=0; j<n; j++)  //j is the coin      
     {
-        for(int i=1; i<=sum; i++)
+        for(int i=1; i<=sum; i++)   //i is the current amount
         {
             if(i - coins[j] >= 0)
             {
