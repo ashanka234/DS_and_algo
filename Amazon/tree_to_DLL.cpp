@@ -50,6 +50,24 @@ void BTree_to_DLL(Node *root, Node **head)
 
     BTree_to_DLL(root->right, head);
 }
+
+void tree_to_DLL(Node *root, Node **head)
+{
+    if(!root)
+        return;
+
+    tree_to_DLL(root->right, head);
+
+    root->right = *head;
+    if(*head)
+    {
+        (*head)->left = root;
+    }
+    *head = root;
+
+    tree_to_DLL(root->left, head);
+}
+
 void inorder(Node *root)
 {
     if(root)
@@ -73,11 +91,11 @@ int main()
 
     //inorder(root); cout << endl;
 
-    BTree_to_DLL(root, &head);
+    //BTree_to_DLL(root, &head);
+    tree_to_DLL(root, &head);
 
-
-    head = newNode(1);
-    head->right = newNode(2);
+    // head = newNode(1);
+    // head->right = newNode(2);
     print_list(head);
 
     return (0);

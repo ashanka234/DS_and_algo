@@ -11,7 +11,7 @@ int count_ways(int n)
 
     for(int i=2; i<=n; i++)
     {
-        dp[i] = (dp[i-1]%MODULO + dp[i-2]%MODULO)%MODULO;
+        dp[i] = (dp[i-1]%MODULO + dp[i-2]%MODULO) % MODULO;
         //cout << dp[i] << " ";
     }
     //cout << endl;
