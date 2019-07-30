@@ -51,6 +51,11 @@ void BTree_to_DLL(Node *root, Node **head)
     BTree_to_DLL(root->right, head);
 }
 
+//yeh wala sayi hai
+//right to left inorder kr rhe hain matlab reverse inorder
+//right se aate hue head ko change krte jaao toiwards left direction, and keep making the prev and next ptrs
+//end mei left most wala DLL ka head hoga, which is basically the first of inorder traversal
+//woh reverse inorder mei last aayega
 void tree_to_DLL(Node *root, Node **head)
 {
     if(!root)
