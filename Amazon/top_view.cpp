@@ -37,7 +37,7 @@ void print_top_view(Node *root)
     {
         hd = root->hd;
 
-        //if count is 1, means it is the first at that horizontal dist
+        //if count is 0, means that particular hd values is appearing first time
         if(hmap.count(hd) == 0)
         {
             hmap[hd] = root->data;
