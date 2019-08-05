@@ -16,13 +16,13 @@ void print_greater(int *arr, int n)
             continue;
         }
 
-        while(!st.empty() && arr[i] > st.top())     //arr[i] is the answer for all the elemnts that are currently in stack
+        while(!st.empty() && arr[i] > st.top())     //arr[i] is the next greater for all the elemnts that are currently in stack
         {
             cout << arr[i] << " ";
             st.pop();
         }
 
-        st.push(arr[i]);
+        st.push(arr[i]);        //when arr[i] < st.top()
     }
 
     while(!st.empty())
