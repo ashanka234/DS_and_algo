@@ -34,7 +34,7 @@ bool Graph::DFSUtil(int v, bool *visited, int parent)
     {
         if(!visited[*it])
         {
-            if(DFSUtil(*it, visited, parent))
+            if(DFSUtil(*it, visited, v))        //v is the pa
                 return true;
         }
 

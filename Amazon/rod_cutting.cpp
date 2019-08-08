@@ -10,7 +10,7 @@ int get_max_val(int *arr, int n)
     for(int i=1; i<=n; i++)     //current length of rod
     {
         int max_cost = INT_MIN;
-        for(int j=0; j<i; j++)
+        for(int j=0; j<i; j++)      //how much we're cutting
         {
             max_cost = max(max_cost, arr[j] + dp[i-1-j]);
         }
